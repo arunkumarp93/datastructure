@@ -10,7 +10,7 @@ def infixToPostfix(token):
     tokenlist = token.split()
 
     for token in tokenlist:
-        if token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or token in"1234567890":
+        if token.isalpha() or token.isdigit():
             postfix.append(token)
         elif token == "(":
             opStack.append(token)
