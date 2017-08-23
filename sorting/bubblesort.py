@@ -20,7 +20,10 @@ def bubblesort(alist):
           and swap the numbers
           eg:- passnum = 6
           start from 0 to 5 loop run and check the list
-
+         
+           if range is equal to length passnum start from 0 
+           and can't check whole list
+           so passnum length has to decrease from higher
         """
         for i in range(passnum):
             if alist[i]>alist[i+1]:
