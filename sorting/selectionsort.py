@@ -10,7 +10,7 @@ def selection(alist):
     length = len(alist)
     for passnum in range(length-1,0,-1):
         maximumnum = 0
-        for i in range(passnum):
+        for i in range(1,passnum+1):
             if alist[i] > alist[maximumnum]:
                 maximumnum = i
         temp = alist[maximumnum]
