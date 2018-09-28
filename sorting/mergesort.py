@@ -8,7 +8,7 @@ def mergesort_helper(un_list):
 		to 1 uing recursive mergeSort(left),mergeSort(right)
 		"""
 		
-	    """
+	        """
 			To run algorithm in best case O(n log n) we need to pass the
 			start and end of the list instead of slice
 			start = 0
@@ -18,8 +18,8 @@ def mergesort_helper(un_list):
 		"""
 
         mid = list_length// 2
-		start = 0
-		end = len(un_list)
+	start = 0
+	end = list_length
         lefthalf = un_list[start:mid]
         righthalf = un_list[mid:end]
 				
