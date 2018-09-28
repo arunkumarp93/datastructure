@@ -1,57 +1,62 @@
-def mergeSort(alist):
-    length = len(alist)
-    print("Splitting ",alist)
-    """
-    split the list until it becomes
-    to 1 uing recursive mergeSort(left),mergeSort(right)
-    """
+def mergesort_helper(un_list):
 
-    """
-    To run algorithm in best case O(n log n) we need to pass the
-    start and end of the list instead of slice
-    start = 0
-    end = len(alist)
-    alist[start:mid]
-    alist[mid:end]
-    """
-    if length > 1:
-        mid = length // 2
-        left = alist[:mid]
-        right = alist[mid:]
+    list_length = len(un_list)
+	
+    if list_length > 1:
+		"""
+		split the list until it becomes
+		to 1 uing recursive mergeSort(left),mergeSort(right)
+		"""
+		
+	    """
+			To run algorithm in best case O(n log n) we need to pass the
+			start and end of the list instead of slice
+			start = 0
+			end = len(alist)
+			alist[start:mid]
+			alist[mid:end]
+		"""
 
-        mergeSort(left)
-        mergeSort(right)
-
-        i=0
-        j=0
-        k=0
-
-        """
-        compare the left and right values and add minimum
-        value to the alist[k] then increase the k position
-
-        check the left seprate and right seprate and add to
-        alist[k]
-        """
-        while i < len(left) and j < len(right):
-            if left[i] < right[j]:
-                alist[k] = left[i]
-                i= i + 1
+        mid = list_length// 2
+		start = 0
+		end = len(un_list)
+        lefthalf = un_list[start:mid]
+        righthalf = un_list[mid:end]
+				
+        mergesort_helper(lefthalf)
+        mergesort_helper(righthalf)
+    
+        lcount=0
+        rcount=0
+        mcount=0
+		
+		"""
+			compare the left and right values and add minimum
+			value to the un_list[mcount] then increase the mcount position
+			check the left seprate and right seprate and add to
+			un_list[mcount]
+		"""
+        while lcount < len(lefthalf) and rcount < len(righthalf):
+            if lefthalf[lcount] < righthalf[rcount]:
+                un_list[mcount] = lefthalf[lcount]
+                lcount = lcount + 1
             else:
-                alist[k] = right[j]
-                j=j+1
-            k = k + 1
-        while i < len(left):
-            alist[k] = left[i]
-            i = i + 1
-            k = k + 1
-        while j < len(right):
-            alist[k] = right[j]
-            j=j+1
-            k=k+1
+                un_list[mcount] = righthalf[rcount]
+                rcount = rcount + 1
+            mcount = mcount + 1
+                
+        while lcount < len(lefthalf):
+            un_list[mcount] = lefthalf[lcount]
+            lcount = lcount+1
+            mcount = mcount + 1
+        
+        while rcount < len(righthalf):
+            un_list[mcount] = righthalf[rcount]
+            rcount = rcount + 1
+            mcount = mcount+1
 
-    print("Merging ",alist)
+def mergesort(unsorted):
+    print (mergesort_helper(unsorted))
 
-alist = [54,26,93,17,77,31,44,55,20]
-mergeSort(alist)
-print(alist)
+
+mergesort([12,34,55,21,45,99,100,1,23])
