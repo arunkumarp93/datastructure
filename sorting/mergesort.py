@@ -56,7 +56,8 @@ def mergesort_helper(alist):
             alist[mergecount] = righthalf[rightcount]
             rightcount += 1
             mergecount += 1
-
+    return alist
+    
 def mergesort(unsorted):
     print (mergesort_helper(unsorted))
 
