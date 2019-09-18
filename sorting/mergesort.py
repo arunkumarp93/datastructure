@@ -11,10 +11,13 @@ def mergesort_helper(alist):
         """
             To run algorithm in best case O(n log n) we need to pass the
             start and end of the list instead of slice
-            start = 0
-            end = len(alist)
-            alist[start:mid]
-            alist[mid:end]
+            def mergeSort(Arr, start, end) {
+
+	            if(start < end) :
+		            mid = (start + end) / 2
+		            mergeSort(Arr, start, mid)
+		            mergeSort(Arr, mid+1, end)
+		            merge(Arr, start, mid, end)
         """
 
         mid = list_length // 2
