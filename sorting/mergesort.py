@@ -50,6 +50,11 @@ def mergesort_helper(alist):
                 rightcount += 1
             mergecount += 1
                 
+	"""Some cases we left with either left or right side with elements . we need to add those to merge array
+ 	  e.g., left = [5] and right =[5]
+	  above loop add the left to merge array and failed now right array value we need to add to merge array so below 
+	  loops does that work
+	"""
         while leftcount < leftlength:
             alist[mergecount] = lefthalf[leftcount]
             leftcount += 1
