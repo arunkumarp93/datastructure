@@ -1,4 +1,4 @@
-from tree.tree import BinaryTree
+from Tree.tree import BinaryTree
 from stack.stack import Stack
 import operator
 
