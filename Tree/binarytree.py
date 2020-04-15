@@ -1,29 +1,57 @@
 class BinaryTree:
-    def __init__(self,rootobj):
-        self.key = rootobj
-        self.leftchild = None
-        self.rightchild = None
-    def insertLeft(self,newvalue):
-        if self.leftchild == None:
-            self.leftchild = BinaryTree(newvalue)
-        else:
-            t = BinaryTree(newvalue)
-            t.leftchild = self.leftchild
-            self.leftchild = t
-    def insertRight(self,newvalue):
-        if self.rightchild == None:
-            self.rightchild = BinaryTree(newvalue)
-        else:
-            t = BinaryTree(newvalue)
-            t.rightchild = self.rightchild
-            self.rightchild = t
-    def getRightChild(self):
-        return self.rightchild
-    def getLeftChild(self):
-        return self.leftchild
-    def setRootVal(self,obj):
-        self.key = obj
-    def getRootVal():
-        return self.key
-t = BinaryTree()
-print(t)
+    """
+    Binary tree class
+
+    """
+    def __init__ (self, data):
+        #root node
+        self.data = data
+        self.left = None
+        #left child
+        self.right = None
+        #right child
+
+    def set_data(self, data):
+        self.data = data
+
+    def get_data(self):
+        return self.data
+
+    def get_left(self):
+        return self.left
+
+    def get_right(self):
+        return self.right
+
+    def insert_left(self, value):
+        temp = BinaryTree(value)
+        if self.left is not None:
+           temp.left  = self.left
+        self.left =  temp
+
+    def inset_right(self, value):
+        temp = BinaryTree(value)
+        if self.right is not None:
+           temp.right = self.right
+        self.right =  temp
+
+    def post_order(self):
+        if self.left:
+            self.left.post_order()
+        if self.right:
+            self.right.post_order()
+        print(self.data)
+
+    def pre_order(self):
+        print(self.data)
+        if self.left:
+            self.left.pre_order()
+        if self.right:
+            self.right.pre_order()
+
+    def in_order(self):
+        if self.left:
+            self.left.in_order()
+        print(self.data)
+        if self.right:
+            self.right.in_order()
