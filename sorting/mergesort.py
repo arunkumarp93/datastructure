@@ -97,6 +97,56 @@ def mergesort(array):
     
 mergesort([10,5,4,11,3,8,2,1])
 
+# Merge sort TOP down apporach simpified:
+
+def merger(array, left, right):
+    
+    left_count = right_count= key_count =0
+    
+    left_len = len(left)
+    right_len = len(right)
+    
+    while left_count < left_len or right_count < right_len:
+        
+        if left_count < left_len and right_count < right_len:
+            left_value = left[left_count]
+            right_value = right[right_count]
+            if left_value < right_value:
+                 array[key_count] = left_value
+                 left_count += 1
+            else:
+                array[key_count] = right_value
+                right_count += 1
+                
+        elif left_count < left_len:
+                array[key_count] = left[left_count]
+                left_count += 1
+        elif right_count < right_len:
+                array[key_count] = right[right_count]
+                right_count += 1
+                
+        key_count += 1
+
+def merge_sort(array):
+    if len(array) > 1:
+        
+        len_array = len(array)
+        mid = len_array // 2
+        
+        left = array[:mid]
+        right = array[mid:]
+        
+        merge_sort(left)
+        merge_sort(right)
+        
+        merger(array, left, right)
+
+array = [6, 5, 12, 10, 9, 1]
+merge_sort(array)
+
+print(array)
+
+
 # Merge Sort Bottom UP:
 # merge with temporary array and copy the sorted values to array again.
 
@@ -113,7 +163,12 @@ def merger_with_temp_array(array, temp, left, mid, end):
             temp[key] = array[right_count]
             right_count += 1
         key += 1
-    
+	
+    # need to copy only left elements 
+    # if small element in right side it'll be moved to left position on previous
+    # loop. E.g., [4,3,2]  ==> temp=[3,3,2] below loop will move the left 4 to temp back
+    # after below loop temp = [3,4,2]
+
     while left_count < mid and left_count < len(array):
         temp[key] = array[left_count]
         left_count += 1
