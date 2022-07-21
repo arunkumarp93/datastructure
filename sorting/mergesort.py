@@ -201,3 +201,44 @@ def merge_sort(array):
         current = 2 * current
         
 print(merge_sort([4, 2, 3, 1, 6, 5]))
+
+
+# Merge Sort with auxiliary array
+
+def merger_with_auxiliary_array(array, left, mid, end):
+    left_count = left
+    right_count = mid
+    key = left
+    temp = [0] * end
+    while left_count<mid and right_count< end:
+        if array[left_count] < array[right_count]:
+            temp[key] = array[left_count]
+            left_count += 1
+        else:
+            temp[key] = array[right_count]
+            right_count += 1
+        key += 1
+    while left_count < mid:
+        temp[key] = array[left_count]
+        left_count += 1
+        key += 1
+    while right_count < end:
+        temp[key] = array[right_count]
+        right_count += 1
+        key += 1
+    for move_key in range(left, end):
+        array[move_key] = temp[move_key]
+def merge_sort(array):
+    current = 1
+    len_array = len(array)
+    left = 0
+    while current < len_array:
+        left = 0
+        while left < len_array:
+            mid = min(left+current, len_array)
+            right = min(left + current*2, len_array)
+            merger_with_auxiliary_array(array, left, mid, right)
+            left = left + current * 2
+        current = 2 * current
+    return array
+print(merge_sort([12,3,4,5,0,8,2,11,7]))
