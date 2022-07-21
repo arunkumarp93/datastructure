@@ -96,4 +96,53 @@ def mergesort(array):
     divider(array, 0, len(array))
     
 mergesort([10,5,4,11,3,8,2,1])
+
+# Merge Sort Bottom UP:
+# merge with temporary array and copy the sorted values to array again.
+
+def merger_with_temp_array(array, temp, left, mid, end):
+    left_count = left
+    right_count = mid
+    key = left
     
+    while left_count<mid and right_count< end:
+        if array[left_count] < array[right_count]:
+            temp[key] = array[left_count]
+            left_count += 1
+        else:
+            temp[key] = array[right_count]
+            right_count += 1
+        key += 1
+    
+    while left_count < mid and left_count < len(array):
+        temp[key] = array[left_count]
+        left_count += 1
+        key += 1
+    
+    for move_key in range(left, end):
+        array[move_key] = temp[move_key]
+    
+            
+            
+def merge_sort(array):
+    
+    current = 1
+    len_array = len(array)
+    left = 0
+    
+    temp = array.copy()
+    
+    while current < len_array: 
+        left = 0
+        while left < len_array:
+            mid = min(left+current, len_array)
+            
+            right = min(left + current*2, len_array)
+            
+            merger_with_temp_array(array, temp, left, mid, right)
+            
+            left = left + current * 2
+        
+        current = 2 * current
+        
+print(merge_sort([4, 2, 3, 1, 6, 5]))
