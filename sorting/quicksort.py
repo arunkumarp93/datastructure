@@ -1,121 +1,37 @@
-"""
-Quicksort takes the pivot value and check
-leftmark and rightmark value and moves
-until sort
-
-It dosen't create nex list like merge sort
-"""
-def quickSort(alist):
+def sort_helper(array, left, right):
     """
-    pass the value to the quicksort helper to
-    split the value if rightmark < leftmark
-
-    then recursively to quicksort for splitted list
+    Move the element less than pivot to left pointer.
+    If there is no element then move the pivot to the left pointer.
+    
+    return the left pointer index 
     """
-    #first = 0
-    #last = len(alist)-1
-    quicksorthelper(alist,0,len(alist)-1)
-
-def quicksorthelper(alist,first,last):
-    if first < last:
-        # intiall splitpoint finder
-        splitpoint = partition(alist,first,last)
-        #recursive call after the splitpoint
-        quicksorthelper(alist,first,splitpoint-1)
-        quicksorthelper(alist,splitpoint+1,last)
-
-def partition(alist,first,last):
-    pivot = alist[first]
-    leftmark = first + 1
-    rightmark = last
-
-    done = False
-
-    while not done:
-        """
-        if leftmark value is less than pivot move the leftmark position(increase)
-
-        if rightmark value is greater than pivot move the rightmark poistion (decrease)
-        """
-        while leftmark <= rightmark and alist[leftmark] <= pivot:
-            leftmark = leftmark + 1
-        while rightmark >= leftmark  and alist[rightmark] >=pivot:
-            rightmark = rightmark - 1
-        #if rightmark is less than leftmark stop looping and swap the pivot value
-        if rightmark < leftmark:
-            done = True
-        else:
-            """
-             if condition fail move the rightmark to leftmark position
-            """
-            temp = alist[leftmark]
-            alist[leftmark] = alist[rightmark]
-            alist[rightmark] = temp
-    temp = alist[first]
-    alist[first] = alist[rightmark]
-    alist[rightmark] = temp
-
-    # after sort return rightmark to splitpoint and split the list and do sort again
-    return rightmark
-
-alist = [54,26,93,17,77,31,44,55,20]
-quickSort(alist)
-print(alist)
-
-"""
- choose the pivot value in the median
-"""
-
-"""
-def quickSort(alist):
-   quickSortHelper(alist,0,len(alist)-1)
-
-def quickSortHelper(alist,first,last):
-   if first<last:
-
-       splitpoint = partition(alist,first,last)
-
-       quickSortHelper(alist,first,splitpoint-1)
-       quickSortHelper(alist,splitpoint+1,last)
-
-def median(a,b,c):
-    if ( a - b) * (c - a) >= 0:
-        return a
-
-    elif (b - a) * (c - b) >= 0:
-        return b
-
-    else:
-        return c
-
-
-def partition(alist,first,last):
-   middle = last // 2
-
-   pivotvalue = median(alist[first],alist[last],alist[middle])
-
-   leftmark = first
-   rightmark = last
-
-   done = False
-   while not done:
-
-       while leftmark <= rightmark and alist[leftmark] <= pivotvalue:
-           leftmark = leftmark + 1
-
-       while alist[rightmark] >= pivotvalue and rightmark >= leftmark:
-           rightmark = rightmark -1
-
-       if rightmark < leftmark:
-           done = True
-       else:
-           temp = alist[leftmark]
-           alist[leftmark] = alist[rightmark]
-           alist[rightmark] = temp
-
-   temp = alist[first]
-   alist[first] = alist[rightmark]
-   alist[rightmark] = temp
-
-   return rightmark
-"""
+    left_marker = left
+    pivot = array[right]
+    
+    for i in range(left, right):
+        if array[i] <= pivot:
+            array[i], array[left_marker] = array[left_marker], array[i]
+            left_marker += 1
+            
+    array[left_marker], array[right] = array[right], array[left_marker]
+            
+    return left_marker
+    
+def quick_sort(array, left, right):
+    """
+      Sort until the left is less than right.
+      
+      find the mid value in first sort then do it continuosly to half of the array
+      every sort left side array end in mid - 1 and right side array start from mid + 1 
+      since mid sorted already.
+    """
+    if left < right:
+        
+        mid = sort_helper(array, left, right)
+            
+        quick_sort(array, left, mid-1)
+        quick_sort(array, mid+1, right)
+    
+data = [8, 7, 2, 1, 0, 9, 6]
+data = [12,3,4,5,0,8,2,11,7]
+quick_sort(data, 0, len(data)-1)
