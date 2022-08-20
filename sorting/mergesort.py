@@ -245,25 +245,29 @@ print(merge_sort([12,3,4,5,0,8,2,11,7]))
 
 def merger_with_left_right_array(array, left, mid, end):
     left_array = array[left:mid]
-    right_array = array[mid:end]
-    left_count = 0
-    right_count = 0
+    right_array = array[mid:right]    
+    len_left_array = len(left_array)
+    len_right_array = len(right_array)
+    
     key = left
-    while left_count < len(left_array) and right_count < len(right_array):
-        if left_array[left_count] < right_array[right_count]:
+    left_count =0
+    right_count = 0
+
+    while left_count < len_left_array or right_count < len_right_array:
+        if left_count < len_left_array and right_count < len_right_array:
+            if left_array[left_count] < right_array[right_count]:
+                array[key] = left_array[left_count]
+                left_count += 1
+            else:
+                array[key] = right_array[right_count]
+                right_count += 1
+        elif left_count < len_left_array:
             array[key] = left_array[left_count]
             left_count += 1
-        else:
+  
+        elif right_count < len_right_array:
             array[key] = right_array[right_count]
             right_count += 1
-        key += 1
-    while left_count < len(left_array):
-        array[key] = left_array[left_count]
-        left_count += 1
-        key += 1
-    while right_count < len(right_array):
-        array[key] = right_array[right_count]
-        right_count += 1
         key += 1
 def merge_sort(array):
     len_array = len(array)
